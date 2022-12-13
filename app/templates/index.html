@@ -1,0 +1,71 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<!--<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>-->
+<script>
+  AFRAME.registerComponent('clickhandler', {
+      init: function() {
+          this.el.addEventListener('click', () => {
+              alert('Clicked!')
+          });
+  }});
+</script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene vr-mode-ui="enabled: false;"
+renderer="logarithmicDepthBuffer: true;"
+embedded
+arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+
+    <a-assets>
+        <a-asset-item id="tree" src="static/Buggy.gltf"></a-asset-item>
+	  </a-assets>
+
+    <a-assets>
+      <a-asset-item id="dinosour" src="static/scene.gltf"></a-asset-item>
+  </a-assets>
+
+  <a-assets>
+    <a-asset-item id="dinosour2" src="static/scene.gltf"></a-asset-item>
+</a-assets>
+    
+    <a-marker type="pattern" url="static/kanji.patt">
+        <a-entity   position="0 0 0" 
+                    rotation="0 0 0"
+                    scale="0.01 0.01 0.01"
+                    gltf-model="#tree"
+                    clickhandler>
+        </a-entity>
+    </a-marker>
+
+    <a-marker type="pattern" url="static/hiro.patt">
+      <a-entity   position="0 0 0" 
+                  rotation="0 0 0"
+                  scale="0.05 0.05 0.05"
+                  gltf-model="#dinosour">
+      </a-entity>
+  </a-marker>
+
+  <a-nft
+      type="nft"
+      url="static/trex-image/trex"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
+    <a-entity   position="0 0 0" 
+        rotation="0 0 0"
+        scale="2 2 2"
+        gltf-model="#dinosour2">
+    </a-entity>
+  </a-nft>
+    
+  <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>
